@@ -1,0 +1,81 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "employees": [
+    {
+      "firstName": "sree;",
+      "lastName": "sree",
+      "email": "ghjkl;@gmil.com",
+      "dob": "2023-10-18T18:30:00.000Z",
+      "gender": "female",
+      "education": "Diploma",
+      "company": "ffghjkl",
+      "experience": -4,
+      "package": 3,
+      "id": 2
+    },
+    {
+      "firstName": "swedha",
+      "lastName": "swe",
+      "email": "swe@gmail.cm",
+      "dob": "2023-10-17T18:30:00.000Z",
+      "gender": "female",
+      "education": "Graduate",
+      "company": "twilight",
+      "experience": 5,
+      "package": 7,
+      "id": 3
+    },
+    {
+      "firstName": "usser",
+      "lastName": "test",
+      "email": "test@gmail.com",
+      "dob": "2023-10-10T18:30:00.000Z",
+      "gender": "female",
+      "education": "Diploma",
+      "company": "tesst",
+      "experience": 8,
+      "package": 11,
+      "id": 4
+    },
+    {
+      "firstName": "user",
+      "lastName": "user",
+      "email": "user@gmail.com",
+      "dob": "2023-10-04T18:30:00.000Z",
+      "gender": "male",
+      "education": "Diploma",
+      "company": "trrre",
+      "experience": 7,
+      "package": 11,
+      "id": 5
+    },
+    {
+      "firstName": "shalini",
+      "lastName": "j",
+      "email": "shalini@gmail.com",
+      "dob": "2023-10-21T18:30:00.000Z",
+      "gender": "female",
+      "education": "Graduate",
+      "company": "twilight",
+      "experience": 5,
+      "package": 4,
+      "id": 6
+    }
+  ]
+}
