@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe({
-      next: (val) => {
+      next: (val) => { 
         if (val) {
           this.getEmployeeList();
         }
