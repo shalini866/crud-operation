@@ -21,12 +21,12 @@ export class EmpAddEditComponent implements OnInit {
   ];
 
   constructor(
-    private _fb: FormBuilder,
-    private _empService: EmployeeService,
-    private _dialogRef: MatDialogRef<EmpAddEditComponent>,
+    private fb: FormBuilder,
+    private empService: EmployeeService,
+    private dialogRef: MatDialogRef<EmpAddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    this.empForm = this._fb.group({
+    this.empForm = this.fb.group({
       firstName: '',
       lastName: '',
       email: '',
@@ -46,20 +46,20 @@ export class EmpAddEditComponent implements OnInit {
   onFormSubmit() {
     if (this.empForm.valid) {
       if (this.data) {
-        this._empService
-          .updateEmployee(this.data.id, this.empForm.value)
-          .subscribe({
+        this.empService
+          .updateEmployee(this.data.id, this.empForm.value).subscribe({
             next: (val: any) => {
-              this._dialogRef.close(true);
+              console.log('value',val);
+              this.dialogRef.close(true);
             },
             error: (err: any) => {
               console.error(err);
             },
           });
       } else {
-        this._empService.addEmployee(this.empForm.value).subscribe({
+        this.empService.addEmployee(this.empForm.value).subscribe({
           next: (val: any) => {
-            this._dialogRef.close(true);
+            this.dialogRef.close(true);
           },
           error: (err: any) => {
             console.error(err);

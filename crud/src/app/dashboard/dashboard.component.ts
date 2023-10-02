@@ -31,8 +31,8 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private _dialog: MatDialog ,
-    private _empService : EmployeeService
+    private dialog: MatDialog ,
+    private empService : EmployeeService
     ){
 
   }
@@ -40,18 +40,19 @@ export class DashboardComponent implements OnInit {
     this.getEmployeeList()
   }
 
-  openAddEditEmpForm() {
-    const dialogRef = this._dialog.open(EmpAddEditComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
-        if (val) {
-          this.getEmployeeList();
-        }
-      },
+
+  openAddEditEmpForm(){
+    const dialogRef = this.dialog.open(EmpAddEditComponent);
+    dialogRef.afterClosed().subscribe((val)=>{
+    console.log('val',val);
+    if(val){
+     this.getEmployeeList();
+    }
     });
   }
+
   getEmployeeList() {
-    this._empService.getEmployeeList().subscribe({
+    this.empService.getEmployeeList().subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
@@ -74,7 +75,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   deleteEmployee(id:number){
-   this._empService.deleteEmployee(id).subscribe({
+   this.empService.deleteEmployee(id).subscribe({
     next : (res) =>{
       console.log('emp delet');
       this.getEmployeeList()
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openEditForm(data: any) {
-    const dialogRef = this._dialog.open(EmpAddEditComponent, {
+    const dialogRef = this.dialog.open(EmpAddEditComponent, {
       data,
     });
 
