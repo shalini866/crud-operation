@@ -76,6 +76,68 @@
       "experience": 5,
       "package": 4,
       "id": 6
+    },
+    {
+      "firstName": "test",
+      "lastName": "user edit",
+      "email": "test@gmail.com",
+      "dob": "2023-10-21T18:30:00.000Z",
+      "gender": "others",
+      "education": "Graduate",
+      "company": "test company",
+      "experience": 7,
+      "package": 8,
+      "id": 7
+    },
+    {
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@gmail.com",
+      "dob": "2023-10-04T18:30:00.000Z",
+      "gender": "female",
+      "company": "test",
+      "experience": 1,
+      "package": 3,
+      "educations": [
+        {
+          "education": "",
+          "cgp": "",
+          "score": "200",
+          "year": "700"
+        },
+        {
+          "education": "",
+          "cgp": "",
+          "score": "",
+          "year": ""
+        }
+      ],
+      "id": 8
+    },
+    {
+      "firstName": "user",
+      "lastName": "user",
+      "email": "test@gmail.com",
+      "dob": "2023-10-05T18:30:00.000Z",
+      "gender": "female",
+      "company": "test",
+      "experience": 2,
+      "package": 2,
+      "educations": [
+        {
+          "education": "",
+          "cgp": "",
+          "score": "500",
+          "year": "880"
+        },
+        {
+          "education": "",
+          "cgp": "",
+          "score": "300",
+          "year": "666"
+        }
+      ],
+      "id": 9
     }
   ]
 }

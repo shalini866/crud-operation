@@ -1,46 +1,47 @@
 .content {
   padding-top: 5px;
-}
-.row {
   display: flex;
-  gap: 0px;
+  flex-direction: column;
 
-  mat-form-field {
-    width: 100%;
+  .row {
+    display: flex;
+    gap: 10px; /* Adjust this value to control the gap between form fields */
+    align-items: center; /* Align items vertically in the middle */
+  }
+
+  .flex-item {
+    flex: 1;
+  }
+
+  .education-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust this value to control the gap between education form fields */
+    align-items: center; /* Align items vertically in the middle */
+  }
+
+  .education-row {
+    flex: 1;
+    display: flex;
+    gap: 10px; /* Adjust this value to control the gap between education form fields */
+  }
+
+  .education-icons {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
   }
 }
 
 .action {
   padding: 0px 0px 0px;
+  display: flex;
+  justify-content: flex-end;
+
   button {
-    flex: 1;
+    margin-left: 10px;
   }
 }
-
-// .content {
-//   padding-top: 5px;
-// }
-
-// .form-container {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 2px;
-// }
-
-// .row {
-//   display: flex;
-//   flex-direction: row;
-//   gap: 10px;
-// }
-
-// .flex-field {
-//   flex: 1;
-// }
-
-// .action {
-//   display: flex;
-//   justify-content: space-between; 
-//   padding: 0px 20px 20px;
-// }
+  
 
 
