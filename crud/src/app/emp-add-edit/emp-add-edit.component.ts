@@ -24,7 +24,7 @@ export class EmpAddEditComponent implements OnInit {
   errField = [
     { key: 'firstName', name: 'First Name' },
   ];
-
+  dynamicEducations: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -41,11 +41,33 @@ export class EmpAddEditComponent implements OnInit {
       company: ['', Validators.required],
       experience: ['', [Validators.required, Validators.min(0)]],
       package: ['', [Validators.required, Validators.min(0)]],
-      educations: this.fb.array([
-        this.createEducationGroup()
-      ])
+      // educations: this.fb.array([
+      //   this.createEducationGroup()
+      // ])
+      educations: this.fb.array([])
     });
+    if (this.data.educations) {
+      this.data.educations.forEach((educationItem: any) => {
+        this.addEducation(educationItem);
+      });
+    }
+
+    this.dynamicEducations.forEach((educationItem: any) => {
+      this.addEducation(educationItem);
+    });
+
+    // if (this.data?.educations) {
+    //   this.data.educations.forEach((educationItem: any) => {
+    //     this.addEducation(educationItem);
+    //   });
+    
+    //   this.dynamicEducations.forEach((educationItem: any) => {
+    //     this.addEducation(educationItem);
+    //   });
+    // }
+    
   }
+  
 
   get f() {
     return (this.empForm.controls);
@@ -54,23 +76,31 @@ export class EmpAddEditComponent implements OnInit {
   get educationGroups(): FormArray {
     return this.empForm.get('educations') as FormArray;
   }
-  createEducationGroup() {
-    return this.fb.group({
-      education: ['', Validators.required],
-      score: ['', [Validators.required, Validators.min(1), Validators.max(500)]],
-      cgp: [{ value: '', disabled: true }, Validators.required],
-      year: ['', Validators.required]
-    });
+
+  addDynamicEducation(educationItem: any) {
+    this.dynamicEducations.push(educationItem);
   }
+  // createEducationGroup() {
+  //   return this.fb.group({
+  //     education: ['', Validators.required],
+  //     score: ['', [Validators.required, Validators.min(1), Validators.max(500)]],
+  //     cgp: [{ value: '', disabled: true }, Validators.required],
+  //     year: ['', Validators.required]
+  //   });
+  // }
 
   ngOnInit(): void {
     this.empForm.patchValue(this.data);
 
   }
-
-  addEducation() {
-    const educations = this.empForm.get('educations') as FormArray;
-    educations.push(this.createEducationGroup());
+  addEducation(educationItem?: any) {
+    const educationGroup = this.fb.group({
+      education: [educationItem ? educationItem.education : '', Validators.required],
+      score: [educationItem ? educationItem.score : '', [Validators.required, Validators.min(1), Validators.max(500)]],
+      cgp: [educationItem ? educationItem.cgp : '', Validators.required],
+      year: [educationItem ? educationItem.year : '', Validators.required]
+    });
+    this.educationGroups.push(educationGroup);
   }
   // addEducation() {
   //   const educationArray = this.empForm.get('educations') as FormArray;
@@ -123,7 +153,48 @@ export class EmpAddEditComponent implements OnInit {
   }
 
 
-
+  // onFormSubmit(event: Event) {
+  //   event.preventDefault();
+  //   if (this.empForm.valid) {
+  //     const data = this.empForm.getRawValue();
+      
+  //     // Gather dynamically added education items
+  //     const dynamicEducations = this.dynamicEducations.map((educationItem: any) => ({
+  //       education: educationItem.get('education').value,
+  //       score: educationItem.get('score').value,
+  //       cgp: educationItem.get('cgp').value,
+  //       year: educationItem.get('year').value
+  //     }));
+  
+  //     // Merge the dynamically added education items with the existing educations
+  //     data.educations = [...data.educations, ...dynamicEducations];
+  
+  //     if (this.data) {
+  //       const id = this.data.id;
+  
+  //       this.empService.updateEmployee(id, data).subscribe({
+  //         next: (val: any) => {
+  //           console.log('value of updateEmp', val);
+  //           this.dialogRef.close(true);
+  //         },
+  //         error: (err: any) => {
+  //           console.error(err);
+  //         },
+  //       });
+  //     } else {
+  //       this.empService.addEmployee(data).subscribe({
+  //         next: (val: any) => {
+  //           console.log('value of addEmp', val);
+  //           this.dialogRef.close(true);
+  //         },
+  //         error: (err: any) => {
+  //           console.error(err);
+  //         },
+  //       });
+  //     }
+  //   }
+  // }
+  
   
   changeCgp(event: any, index: number) {
     console.log('event',event);

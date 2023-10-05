@@ -32,12 +32,6 @@
           "score": "334",
           "cgp": "2.7 %",
           "year": "210"
-        },
-        {
-          "education": "Graduate",
-          "score": "200",
-          "cgp": "1.6 %",
-          "year": "434"
         }
       ],
       "id": 1
@@ -57,9 +51,46 @@
           "score": "500",
           "cgp": "4.0 %",
           "year": "232"
+        },
+        {
+          "education": "Post Graduate",
+          "score": "333",
+          "cgp": "2.7 %",
+          "year": "9098"
         }
       ],
       "id": 2
+    },
+    {
+      "firstName": "test",
+      "lastName": "hjk",
+      "email": "gfhh@gmail.com",
+      "dob": "2023-10-11T18:30:00.000Z",
+      "gender": "female",
+      "company": "ghjkj",
+      "experience": 2,
+      "package": 1,
+      "educations": [
+        {
+          "education": "Graduate",
+          "score": "345",
+          "cgp": "2.8 %",
+          "year": "887"
+        },
+        {
+          "education": "Diploma",
+          "score": "300",
+          "cgp": "2.4 %",
+          "year": "234"
+        },
+        {
+          "education": "Matric",
+          "score": "200",
+          "cgp": "1.6 %",
+          "year": "5565"
+        }
+      ],
+      "id": 3
     }
   ]
 }
