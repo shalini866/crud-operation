@@ -18,126 +18,48 @@
   },
   "employees": [
     {
-      "firstName": "sree;",
-      "lastName": "sree",
-      "email": "ghjkl;@gmil.com",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@gmail.com",
+      "dob": "2023-10-21T18:30:00.000Z",
+      "gender": "male",
+      "company": "dfghj",
+      "experience": 2,
+      "package": 1,
+      "educations": [
+        {
+          "education": "Post Graduate",
+          "score": "334",
+          "cgp": "2.7 %",
+          "year": "210"
+        },
+        {
+          "education": "Graduate",
+          "score": "200",
+          "cgp": "1.6 %",
+          "year": "434"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "firstName": "ttte",
+      "lastName": "ewf",
+      "email": "dew@gmail.com",
       "dob": "2023-10-18T18:30:00.000Z",
       "gender": "female",
-      "education": "Diploma",
-      "company": "ffghjkl",
-      "experience": -4,
-      "package": 3,
-      "id": 2
-    },
-    {
-      "firstName": "test",
-      "lastName": "swe",
-      "email": "swe@gmail.cm",
-      "dob": "2023-10-17T18:30:00.000Z",
-      "gender": "female",
-      "education": "Graduate",
-      "company": "twilight",
-      "experience": 5,
-      "package": 7,
-      "id": 3
-    },
-    {
-      "firstName": "usser",
-      "lastName": "test",
-      "email": "test@gmail.com",
-      "dob": "2023-10-10T18:30:00.000Z",
-      "gender": "female",
-      "education": "Diploma",
-      "company": "tesst",
-      "experience": 8,
-      "package": 11,
-      "id": 4
-    },
-    {
-      "firstName": "user",
-      "lastName": "user",
-      "email": "user@gmail.com",
-      "dob": "2023-10-04T18:30:00.000Z",
-      "gender": "male",
-      "education": "Diploma",
-      "company": "trrre",
-      "experience": 7,
-      "package": 11,
-      "id": 5
-    },
-    {
-      "firstName": "shalini",
-      "lastName": "j",
-      "email": "shalini@gmail.com",
-      "dob": "2023-10-21T18:30:00.000Z",
-      "gender": "female",
-      "education": "Graduate",
-      "company": "twilight",
-      "experience": 5,
-      "package": 4,
-      "id": 6
-    },
-    {
-      "firstName": "test",
-      "lastName": "user edit",
-      "email": "test@gmail.com",
-      "dob": "2023-10-21T18:30:00.000Z",
-      "gender": "others",
-      "education": "Graduate",
-      "company": "test company",
-      "experience": 7,
-      "package": 8,
-      "id": 7
-    },
-    {
-      "firstName": "test",
-      "lastName": "test",
-      "email": "test@gmail.com",
-      "dob": "2023-10-04T18:30:00.000Z",
-      "gender": "female",
-      "company": "test",
+      "company": "fgh",
       "experience": 1,
-      "package": 3,
+      "package": 1,
       "educations": [
         {
-          "education": "",
-          "cgp": "",
-          "score": "200",
-          "year": "700"
-        },
-        {
-          "education": "",
-          "cgp": "",
-          "score": "",
-          "year": ""
-        }
-      ],
-      "id": 8
-    },
-    {
-      "firstName": "user",
-      "lastName": "user",
-      "email": "test@gmail.com",
-      "dob": "2023-10-05T18:30:00.000Z",
-      "gender": "female",
-      "company": "test",
-      "experience": 2,
-      "package": 2,
-      "educations": [
-        {
-          "education": "",
-          "cgp": "",
+          "education": "Graduate",
           "score": "500",
-          "year": "880"
-        },
-        {
-          "education": "",
-          "cgp": "",
-          "score": "300",
-          "year": "666"
+          "cgp": "4.0 %",
+          "year": "232"
         }
       ],
-      "id": 9
+      "id": 2
     }
   ]
 }

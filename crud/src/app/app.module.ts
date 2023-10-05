@@ -16,7 +16,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {  MatPaginatorModule } from '@angular/material/paginator';
@@ -47,7 +47,8 @@ import { MatSortModule } from '@angular/material/sort';
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule
 
   ],
   providers: [],

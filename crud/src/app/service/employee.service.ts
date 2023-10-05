@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
+  getEmployeeById: any;
 
   constructor( private _http : HttpClient) { }
 
   addEmployee(data:any):Observable<any> {
     return this._http.post('http://localhost:3000/employees',data)
   }
+
   getEmployeeList():Observable<any> {
     return this._http.get('http://localhost:3000/employees')
   }

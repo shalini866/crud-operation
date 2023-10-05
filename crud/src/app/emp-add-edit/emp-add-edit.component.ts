@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmployeeService } from '../service/employee.service';
+
 
 @Component({
   selector: 'app-emp-add-edit',
@@ -12,13 +13,18 @@ export class EmpAddEditComponent implements OnInit {
 
   empForm: FormGroup;
 
-  education: string[] = [
+  educationOptions: string[] = [
     'Matric',
     'Diploma',
     'Intermediate',
     'Graduate',
     'Post Graduate',
   ];
+  submitted = false;
+  errField = [
+    { key: 'firstName', name: 'First Name' },
+  ];
+
 
   constructor(
     private fb: FormBuilder,
@@ -27,14 +33,14 @@ export class EmpAddEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.empForm = this.fb.group({
-      firstName: ['', Validators.required], 
-      lastName: ['', Validators.required],  
-      email: ['', [Validators.required, Validators.email]], 
-      dob: ['',], 
-      gender: ['', Validators.required], 
-      company: ['', Validators.required], 
-      experience: ['', [Validators.required, Validators.min(0)]], 
-      package: ['', [Validators.required, Validators.min(0)]], 
+      firstName:['', Validators.required],     
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      dob: ['',Validators.required],
+      gender: ['', Validators.required],
+      company: ['', Validators.required],
+      experience: ['', [Validators.required, Validators.min(0)]],
+      package: ['', [Validators.required, Validators.min(0)]],
       educations: this.fb.array([
         this.createEducationGroup()
       ])
@@ -49,95 +55,99 @@ export class EmpAddEditComponent implements OnInit {
     return this.empForm.get('educations') as FormArray;
   }
   createEducationGroup() {
-    const educationGroup = this.fb.group({
-      education: [''],
-      cgp: [{ value: null, disabled: true }],
-      score: [null], 
-      year: ['']
+    return this.fb.group({
+      education: ['', Validators.required],
+      score: ['', [Validators.required, Validators.min(1), Validators.max(500)]],
+      cgp: [{ value: '', disabled: true }, Validators.required],
+      year: ['', Validators.required]
     });
-  
-    // const scoreControl = educationGroup.get('score');
-    // const cgpControl = educationGroup.get('cgp');
-  
-    // scoreControl.valueChanges.subscribe((score) => {
-    //   const cgp = this.calculateCGP(score);
-    //   cgpControl.setValue(cgp);
-    // });
-  
-    // return educationGroup;
-  }
-  
-  
-  
-  
-  
-  ngOnInit(): void {
-     this.empForm.patchValue(this.data);
   }
 
- 
-  addEducation() {
-    this.educationGroups.push(this.createEducationGroup());
+  ngOnInit(): void {
+    this.empForm.patchValue(this.data);
+
   }
+
+  addEducation() {
+    const educations = this.empForm.get('educations') as FormArray;
+    educations.push(this.createEducationGroup());
+  }
+  // addEducation() {
+  //   const educationArray = this.empForm.get('educations') as FormArray;
+  //   const newEducationGroup = this.fb.group({
+  //     education: ['', Validators.required],
+  //     cgp: [{ value: '', disabled: true }, Validators.required],
+  //     year: ['', Validators.required],
+  //     score: ['', [Validators.required, Validators.min(1), Validators.max(500)]],
+  //   });
+  
+  //   educationArray.push(newEducationGroup);
+  // }
 
   removeEducation(index: number) {
-    this.educationGroups.removeAt(index);
+    const educations = this.empForm.get('educations') as FormArray;
+    educations.removeAt(index);
   }
-  onFormSubmit() {
+
+  onFormSubmit(event: Event) {
+    event.preventDefault();
     if (this.empForm.valid) {
+      const data = this.empForm.getRawValue();
+      console.log('Form Values:', this.empForm.value);
       if (this.data) {
-        this.empService
-          .updateEmployee(this.data.id, this.empForm.value).subscribe({
-            next: (val: any) => {
-              console.log('value',val);
-              this.dialogRef.close(true);
-            },
-            error: (err: any) => {
-              console.error(err);
-            },
-          });
-      } else {
-        this.empService.addEmployee(this.empForm.value).subscribe({
+  
+        const id = this.data.id;
+  
+        this.empService.updateEmployee(id, data).subscribe({
           next: (val: any) => {
+            console.log('value of updateEmp', val);
             this.dialogRef.close(true);
           },
           error: (err: any) => {
             console.error(err);
           },
         });
+      } else {
+        this.empService.addEmployee(data).subscribe({
+          next: (val: any) => {
+            console.log('value of addEmp', val);
+            this.dialogRef.close(true);
+          },
+          error: (err: any) => {
+            console.error(err);
+          },
+        }); 
       }
     }
+
   }
 
 
-  // calculateCGP(score: number): number | null {
-  //   if (!isNaN(score)) {
-  //     if (score >= 90) {
-  //       return 4.0;
-  //     } else if (score >= 80) {
-  //       return 3.7;
-  //     } else if (score >= 75) {
-  //       return 3.3;
-  //     } else if (score >= 70) {
-  //       return 3.0;
-  //     } else if (score >= 65) {
-  //       return 2.7;
-  //     } else if (score >= 60) {
-  //       return 2.3;
-  //     } else if (score >= 55) {
-  //       return 2.0;
-  //     } else if (score >= 50) {
-  //       return 1.7;
-  //     } else if (score >= 45) {
-  //       return 1.3;
-  //     } else if (score >= 40) {
-  //       return 1.0;
-  //     } else {
-  //       return null; // Handle non-numeric input or empty input
+
+  
+  changeCgp(event: any, index: number) {
+    console.log('event',event);
+    const educationArray = this.empForm.get('educations') as FormArray;
+    const educationGroup = educationArray.at(index) as FormGroup;
+    const scoreControl = educationGroup.get('score');
+    const cgpControl = educationGroup.get('cgp');
+  
+    if (scoreControl!.valid) {
+      const scoreValue = parseFloat(scoreControl!.value);
+      const cgpValue = (scoreValue / 500) * 4.0;
+      cgpControl!.setValue(cgpValue.toFixed(1) + ' %');
+    }
+  }
+
+  // findInvalidControls() {
+  //   const invalid = [];
+  //   const controls = this.empForm.controls;
+  //   for (const name in controls) {
+  //     if (controls[name].invalid) {
+  //       invalid.push(name);
   //     }
-  //   } else {
-  //     return null; // Handle non-numeric input or empty input
   //   }
+  //   return invalid;
   // }
   
   

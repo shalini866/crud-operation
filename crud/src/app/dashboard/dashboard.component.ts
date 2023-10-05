@@ -1,10 +1,11 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, Input, OnInit ,ViewChild} from '@angular/core';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeService } from '../service/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,8 +28,12 @@ export class DashboardComponent implements OnInit {
   ];
   dataSource!: MatTableDataSource<any>;
 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  empform: FormGroup<any> | any;
+
+ 
 
   constructor(
     private dialog: MatDialog ,
@@ -44,12 +49,14 @@ export class DashboardComponent implements OnInit {
   openAddEditEmpForm(){
     const dialogRef = this.dialog.open(EmpAddEditComponent);
     dialogRef.afterClosed().subscribe((val)=>{
-    console.log('val',val);
+    console.log('value of openaddedit',val);
     if(val){
      this.getEmployeeList();
     }
     });
   }
+
+
 
   getEmployeeList() {
     this.empService.getEmployeeList().subscribe({
@@ -57,7 +64,7 @@ export class DashboardComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator
-        console.log('res',res);
+        console.log('getEmpreslist',res);
         
       },
       error: (err) => {
@@ -66,14 +73,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   deleteEmployee(id:number){
    this.empService.deleteEmployee(id).subscribe({
     next : (res) =>{
@@ -85,16 +85,32 @@ export class DashboardComponent implements OnInit {
   }
 
   openEditForm(data: any) {
+    console.log('openeditform',data);
+    
     const dialogRef = this.dialog.open(EmpAddEditComponent, {
       data,
     });
 
     dialogRef.afterClosed().subscribe({
       next: (val) => { 
+        console.log();
+        
         if (val) {
           this.getEmployeeList();
+
         }
       },
     });
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  
 }
