@@ -4,21 +4,24 @@
 <form [formGroup]="empForm" (ngSubmit)="onFormSubmit($event)">
     <div mat-dialog-content class="content">
         <div class="row">
-            <mat-form-field appearance="outline" class="flex-item">
+            <!-- <mat-form-field appearance="outline" class="flex-item">
                 <mat-label>First name</mat-label>
                 <input matInput type="text" placeholder="Ex. user" formControlName="firstName">
-                <mat-error *ngIf="submitted && f['firstName'].errors?.['hasError']('required')">First name is required</mat-error>
+                <mat-error *ngIf="submitted && f['firstName'].errors?.['hasError']('required')">First name is
+                    required</mat-error>
 
-                <!-- <div *ngIf="submitted && f['firstName'].errors" class="error-form text-danger fs-15">
+                 <div *ngIf="submitted && f['firstName'].errors" class="error-form text-danger fs-15">
                     <div *ngIf="f['firstName'].errors ['required']">
                         First name is required</div>
-                </div> -->
-              </mat-form-field>
+                </div> 
+            </mat-form-field> -->
+             
+            <mat-form-field appearance="outline" class="flex-item">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="Ex. test" formControlName="firstName">
+                <mat-error *ngIf="empForm.get('firstName')?.hasError('required')">first Name  is required</mat-error>
+            </mat-form-field>
 
-
-              
-              
-              
             <mat-form-field appearance="outline" class="flex-item">
                 <mat-label>Last Name</mat-label>
                 <input matInput placeholder="Ex. test" formControlName="lastName">
@@ -26,7 +29,7 @@
             </mat-form-field>
         </div>
 
-         
+
         <div class="row">
             <mat-form-field appearance="outline" class="flex-item">
                 <mat-label>Email</mat-label>
@@ -57,55 +60,59 @@
         <div class="row">
             <div formArrayName="educations" class="education-container">
                 <!-- <div class="row" *ngFor="let educations of $any(f['educations'])?.controls; let i = index"> -->
-                    <div class="row" *ngFor="let education of educationGroups.controls; let i = index">
+                <div class="row" *ngFor="let education of educationGroups.controls; let i = index">
 
-                        <div [formGroupName]="i" class="flex-item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Education</mat-label>
-                                <mat-select formControlName="education">
-                                    <mat-option *ngFor="let val of educationOptions" [value]="val">{{ val }}</mat-option>
-                                  </mat-select>
-                                <mat-error *ngIf="empForm.get('educations')?.hasError('required')">education
+                    <div [formGroupName]="i" class="flex-item">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Education</mat-label>
+                            <mat-select formControlName="education">
+                                <mat-option *ngFor="let val of educationOptions" [value]="val">{{ val }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="empForm.get('educations')?.hasError('required')">education
+                                required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Score</mat-label>
+                            <input matInput placeholder="Ex. 450" formControlName="score" (input)="changeCgp($event, i)" (keypress)="onlyNumberKey($event)">
+                            <mat-error *ngIf="education.get('score')?.hasError('required')">Score is required</mat-error>
+                            <mat-error *ngIf="education.get('score')?.hasError('min') || education.get('score')?.hasError('max')">Score must be between 1 to 500</mat-error>
+                          </mat-form-field>
+                          
+
+
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>CGP</mat-label>
+                            <input matInput placeholder="EX : 6.9 %" formControlName="cgp" readonly>
+                            <mat-error *ngIf="empForm.get('cgp')?.hasError('required')">cgp
+                                required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Year</mat-label>
+                            <input matInput type="" placeholder="Ex.2010" formControlName="year" pattern="[0-9]*" (keypress)="onlyNumberKey($event)">
+                    
+                                <mat-error *ngIf="education.get('year')?.hasError('required')">year is
                                     required</mat-error>
-                            </mat-form-field>
-    
-                 
-                              <mat-form-field appearance="outline" class="flex-item">
-                                <mat-label>Score</mat-label>
-                                <input matInput placeholder="Ex. 450" formControlName="score" (input)="changeCgp($event, i)">
-                                <mat-error *ngIf="education.get('score')?.hasError('required')">Score is required</mat-error>
-                                <mat-error *ngIf="education.get('score')?.hasError('min') || education.get('score')?.hasError('max')">Score must be between 1 to 500</mat-error>
-                              </mat-form-field>
-                              
-                              
-                            <mat-form-field appearance="outline" class="flex-item">
-                                <mat-label>CGP</mat-label>
-                                <input matInput placeholder="EX : 6.9 %" formControlName="cgp" readonly>
-                                <mat-error *ngIf="empForm.get('cgp')?.hasError('required')">cgp
-                                    required</mat-error>
-                            </mat-form-field>
-    
-                            <mat-form-field appearance="outline" class="flex-item">
-                                <mat-label>Year</mat-label>
-                                <input matInput type="" placeholder="Ex.2010" formControlName="year" pattern="[0-9]*">
-                                <mat-error *ngIf="empForm.get('year')?.hasError('required')">year
-                                    required</mat-error>
-                              </mat-form-field>
-                              
-                              <button *ngIf="i > 0" mat-icon-button (click)="removeEducation(i)">
-                                <mat-icon>delete</mat-icon>
-                              </button>
-                        </div>
+                                <mat-error
+                                    *ngIf="education.get('year')?.hasError('min') || education.get('year')?.hasError('max')">year
+                                    must be in the range of 2023</mat-error>
+                        </mat-form-field>
+
+                        <button *ngIf="i > 0" mat-icon-button (click)="removeEducation(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
+                </div>
                 <!-- </div> -->
-                <button mat-icon-button type="button" (click)="addEducation()">
+                <button mat-icon-button type="button" (click)="newAddEducation()">
                     <mat-icon>control_point</mat-icon>
                 </button>
             </div>
         </div>
 
 
-          
+
 
         <div class="row">
             <mat-form-field appearance="outline" class="flex-item">
@@ -130,6 +137,6 @@
         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
         <button mat-raised-button color="primary" type="submit" [disabled]="empForm.invalid">{{data ? 'Update':
             'Save'}}</button>
-          
+
     </div>
 </form>

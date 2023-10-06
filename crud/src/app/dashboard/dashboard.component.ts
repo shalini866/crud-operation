@@ -1,11 +1,12 @@
-import { Component, Input, OnInit ,ViewChild} from '@angular/core';
+import { Component, Inject, Input, OnInit ,ViewChild} from '@angular/core';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { EmployeeService } from '../service/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup } from '@angular/forms';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +38,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog ,
-    private empService : EmployeeService
+    private empService : EmployeeService,
+  
     ){
 
   }
@@ -74,16 +76,24 @@ export class DashboardComponent implements OnInit {
   }
   
 
-  deleteEmployee(id:number){
-   this.empService.deleteEmployee(id).subscribe({
-    next : (res) =>{
-      console.log('emp delet');
-      this.getEmployeeList()
-    },
-    error: console.log,
-   })
-  }
 
+
+  deleteEmployee(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.empService.deleteEmployee(id).subscribe({
+          next: (res) => {
+            this.getEmployeeList();
+          },
+          error: console.log,
+        });
+      }
+     
+    });
+  }
+  
   openEditForm(data: any) {
     console.log('openeditform',data);
     
@@ -113,4 +123,7 @@ export class DashboardComponent implements OnInit {
   }
 
   
+
+  
+
 }
