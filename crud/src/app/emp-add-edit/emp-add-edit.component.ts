@@ -37,7 +37,7 @@ export class EmpAddEditComponent implements OnInit {
     //   this.addEducation(educationItem);
     // });
 
-
+ 
   }
 
 

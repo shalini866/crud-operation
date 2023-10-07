@@ -16,5 +16,75 @@
   "profile": {
     "name": "typicode"
   },
-  "employees": []
+  "employees": [
+    {
+      "firstName": "Talon",
+      "lastName": "Glover",
+      "email": "sonipakuzu@mailinator.com",
+      "dob": "2004-10-15T18:30:00.000Z",
+      "gender": "male",
+      "company": "Noble and Robinson Trading",
+      "experience": 27,
+      "package": 16,
+      "educations": [
+        {
+          "education": "Matric",
+          "score": "300",
+          "cgp": "2.4 %",
+          "year": "2004"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "firstName": "Jemima",
+      "lastName": "Walker",
+      "email": "guwimyru@mailinator.com",
+      "dob": "2018-06-14T18:30:00.000Z",
+      "gender": "female",
+      "company": "Dean and Gilliam Plc",
+      "experience": 68,
+      "package": 49,
+      "educations": [
+        {
+          "education": "Diploma",
+          "score": "400",
+          "cgp": "3.2 %",
+          "year": "1997"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "firstName": "Lee",
+      "lastName": "Bolton",
+      "email": "jifaro@mailinator.com",
+      "dob": "1984-09-23T18:30:00.000Z",
+      "gender": "others",
+      "company": "Kaufman and Briggs Trading",
+      "experience": 70,
+      "package": 5,
+      "educations": [
+        {
+          "education": "Intermediate",
+          "score": "500",
+          "cgp": "4.0 %",
+          "year": "2018"
+        },
+        {
+          "education": "Intermediate",
+          "score": "450",
+          "cgp": "3.6 %",
+          "year": "2010"
+        },
+        {
+          "education": "Graduate",
+          "score": "222",
+          "cgp": "1.8 %",
+          "year": "2020"
+        }
+      ],
+      "id": 3
+    }
+  ]
 }

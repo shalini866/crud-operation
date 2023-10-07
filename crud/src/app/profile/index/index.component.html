@@ -1,0 +1,10 @@
+<app-product-list #productListComponent
+  class="card p-2"
+  [productList]="products"
+  (onSelected)="onSelectedProduct($event)">
+  <h1>The session id is {{ productListComponent.sessionId }}</h1>
+</app-product-list>
+
+<div *ngIf="selectedProduct" class="card">
+<h1>You selected {{ selectedProduct.name }}</h1>
+</div>
