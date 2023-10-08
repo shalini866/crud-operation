@@ -1,4 +1,4 @@
-<app-product-list #productListComponent
+<!-- <app-product-list #productListComponent
   class="card p-2"
   [productList]="products"
   (onSelected)="onSelectedProduct($event)">
@@ -7,4 +7,30 @@
 
 <div *ngIf="selectedProduct" class="card">
 <h1>You selected {{ selectedProduct.name }}</h1>
-</div>
+</div> -->
+
+<!-- <h3>Parent Component</h3>
+
+<label>Parent </label>
+<input type="text" #pcomponent (keyup)="0"/>
+
+<p>Value of child component is: {{ CData }}</p>
+<hr>
+<app-product-list [PData]="pcomponent.value" (childEvent)="CData=$event"></app-product-list> -->
+
+<h3>Parent Component</h3>
+
+<label>Parent </label>
+<input type="text" #pcomponent (keyup)="onParentInputChange(pcomponent.value)" />
+
+<p>Value of child component is: {{ CData }}</p>
+<hr>
+<app-product-list></app-product-list>
+
+
+
+
+
+
+
+

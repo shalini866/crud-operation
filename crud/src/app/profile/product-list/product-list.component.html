@@ -1,5 +1,23 @@
-<li *ngFor="let product of productList" (click)="onSelectedProduct(product)">
+<!-- <li *ngFor="let product of productList" (click)="onSelectedProduct(product)">
     {{ product.name }}
   </li>
-  <h1>The session id is {{ sessionId }}</h1>
+  <h1>The session id is {{ sessionId }}</h1> -->
 
+  <!-- <h3>Child Component</h3>
+
+  <label>Child </label>
+  <input type="text" #ccomponent (keyup)="onChange(ccomponent.value)" />
+  
+  <p>Value of parent component is: {{ PData }}</p> -->
+
+  <h3>Child Component</h3>
+
+  <label>Child </label>
+  <input type="text" #ccomponent (keyup)="onChildInputChange(ccomponent.value)" />
+  
+  <p>Value of parent component is: {{ PData }}</p>
+  
+
+  
+
+  
