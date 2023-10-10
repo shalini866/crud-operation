@@ -25,6 +25,9 @@
 
 <p>Value of child component is: {{ CData }}</p>
 <hr>
+<button (click)="complete()">complete</button>
+<button (click)="errorObservable(pcomponent.value)">errorObservable</button>
+
 <app-product-list></app-product-list>
 
 

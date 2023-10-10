@@ -7,17 +7,24 @@ import { DataService } from 'src/app/service/data.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit{
-  @Input() productList: { name: string; id: number; price: number }[] = [];
-  @Output() onSelected = new EventEmitter<any>();
-  sessionId = Math.random();
+  // @Input() productList: { name: string; id: number; price: number }[] = [];
+  // @Output() onSelected = new EventEmitter<any>();
+  // sessionId = Math.random();
   // @Input() PData: number | any;
   // @Output() childEvent = new EventEmitter();
   
   PData: any;
 
   constructor(private dataService: DataService) {
-    this.dataService.parentData$.subscribe((data) => {
+    this.dataService.parentData$.subscribe(      (data) => {
       this.PData = data;
+      console.log('data:', data);
+    },
+    (error) => {
+      console.log('Error:', error);
+    },
+    () => {
+      console.log('Observable complete');
     });
   }
 

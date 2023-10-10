@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductService {
 
-    private product$ = new BehaviorSubject<any>({});
+  private product$ = new BehaviorSubject<any>({});
   selectedProduct$ = this.product$.asObservable();
   private productListBus$ = new BehaviorSubject<any>([]);
   productList$ = this.productListBus$.asObservable();
